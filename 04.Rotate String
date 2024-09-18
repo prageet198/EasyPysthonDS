@@ -1,0 +1,31 @@
+TITLE:-Rotate String
+URL:-https://leetcode.com/problems/rotate-string/description/
+
+Question:-
+Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+
+A shift on s consists of moving the leftmost character of s to the rightmost position.
+
+For example, if s = "abcde", then it will be "bcdea" after one shift.
+
+Solution:-
+class Solution(object):
+    def rotateString(self, s, goal):
+        # Check if the lengths are different
+        if len(s) != len(goal):
+            return False  # They can't match if they have different lengths
+
+        # Create a new string by doubling s
+        doubled_s = s + s
+
+        # Check if goal is in the doubled string
+        return goal in doubled_s
+
+# Example usage
+solution = Solution()
+s = "abcde"
+goal = "cdeab"
+
+# Test the method
+result = solution.rotateString(s, goal)
+print(result)  # Output: True

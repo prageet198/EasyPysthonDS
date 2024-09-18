@@ -1,0 +1,40 @@
+TITLE:-Reverse Words in a String III
+URL:-https://leetcode.com/problems/reverse-words-in-a-string-iii/
+
+Question:-
+Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+Example 1:
+
+Input: s = "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+Example 2:
+
+Input: s = "Mr Ding"
+Output: "rM gniD"
+
+Solution:-
+class Solution(object):
+    def reverseWords(self, s):
+        # Step 1: Split the string into a list of words
+        words = s.split(' ')
+        
+        # Step 2: Create an empty list to store reversed words
+        reversed_words = []
+        
+        # Step 3: Loop through each word
+        for word in words:
+            # Reverse the current word and add it to the list
+            reversed_words.append(word[::-1])
+        
+        # Step 4: Join the reversed words back into a single string
+        return ' '.join(reversed_words)
+
+# Example usage:
+solution = Solution()
+
+# Test cases
+result1 = solution.reverseWords("Let's take LeetCode contest")
+print(result1)  # Output: "s'teL ekat edoCteeL tsetnoc"
+
+result2 = solution.reverseWords("Mr Ding")
+print(result2)  # Output: "rM gniD"

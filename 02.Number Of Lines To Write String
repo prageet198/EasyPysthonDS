@@ -1,0 +1,85 @@
+TITLE:-Number Of Lines To Write String
+URL:-https://leetcode.com/problems/number-of-lines-to-write-string/description/
+
+Question:-
+You are given a string s of lowercase English letters and an array widths denoting how many pixels wide each lowercase English letter is. Specifically, 
+widths[0] is the width of 'a', widths[1] is the width of 'b', and so on.
+
+You are trying to write s across several lines, where each line is no longer than 100 pixels. Starting at the beginning of s, write as many letters 
+on the first line such that the total width does not exceed 100 pixels. Then, from where you stopped in s, continue writing as many letters as you can 
+on the second line. Continue this process until you have written all of s.
+
+Return an array result of length 2 where:
+
+result[0] is the total number of lines.
+result[1] is the width of the last line in pixels.
+
+Solution:-
+class Solution:
+    def numberOfLines(self, widths, s):
+        total_lines = 0
+        current_width = 0
+        
+        for char in s:
+            char_index = ord(char) - ord('a')  # Get the index for the character
+            char_width = widths[char_index]     # Get the width of the character
+            
+            if current_width + char_width > 100:
+                # If adding this character exceeds 100 pixels, start a new line
+                total_lines += 1
+                current_width = char_width  # Start the new line with the current character
+            else:
+                # Add character to the current line
+                current_width += char_width
+                
+        # Account for the last line if it has characters
+        if current_width > 0:
+            total_lines += 1
+        
+        return [total_lines, current_width]
+
+# Example usage
+widths = [1, 3, 2, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 4]
+s = "abcde"
+solution = Solution()
+result = solution.numberOfLines(widths, s)
+print(result)  # Output will be [1, width of the last line]
+
+
+#char_index = ord(char) - ord('a')
+is used to convert a lowercase letter (from 'a' to 'z') into an index that corresponds to its position in the alphabet.
+
+    ord(char): The ord() function in Python takes a single character (a string of length 1) and returns its Unicode code point (an integer). For example:
+        ord('a') returns 97
+        ord('b') returns 98
+        ord('c') returns 99
+        And so on, up to ord('z'), which returns 122.
+
+Subtracting ord('a')
+
+    ord('a'): As mentioned, this returns 97. By subtracting ord('a') from ord(char), we effectively normalize the values of the lowercase letters to start from 0:
+        For example:
+            For 'a':
+                ord('a') - ord('a') = 97 - 97 = 0
+            For 'b':
+                ord('b') - ord('a') = 98 - 97 = 1
+            For 'c':
+                ord('c') - ord('a') = 99 - 97 = 2
+            For 'z':
+                ord('z') - ord('a') = 122 - 97 = 25
+
+Resulting char_index
+
+    The result of ord(char) - ord('a') gives you a zero-based index that corresponds to the position of the letter in the alphabet:
+        'a' becomes 0
+        'b' becomes 1
+        'c' becomes 2
+        ...
+        'z' becomes 25
+
+Purpose in the Code
+
+This char_index is then used to access the widths array:
+
+    widths[char_index] retrieves the width of the corresponding letter. For example, if char is 'b', char_index would be 1, and widths[1] 
+	would give you the width of the letter 'b'.

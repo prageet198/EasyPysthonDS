@@ -1,0 +1,75 @@
+TITLE:-Unique Morse Code Words
+URL:-https://leetcode.com/problems/unique-morse-code-words/description/
+
+Question:-
+International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows:
+
+'a' maps to ".-",
+'b' maps to "-...",
+'c' maps to "-.-.", and so on.
+For convenience, the full table for the 26 letters of the English alphabet is given below:
+
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+Given an array of strings words where each word can be written as a concatenation of the Morse code of each letter.
+
+For example, "cab" can be written as "-.-..--...", which is the concatenation of "-.-.", ".-", and "-...". We will call such a 
+concatenation the transformation of a word.
+Return the number of different transformations among all words we have.
+
+Example 1:
+
+Input: words = ["gin","zen","gig","msg"]
+Output: 2
+Explanation: The transformation of each word is:
+"gin" -> "--...-."
+"zen" -> "--...-."
+"gig" -> "--...--."
+"msg" -> "--...--."
+There are 2 different transformations: "--...-." and "--...--.".
+Example 2:
+
+Input: words = ["a"]
+Output: 1
+ 
+
+Constraints:
+
+1 <= words.length <= 100
+1 <= words[i].length <= 12
+words[i] consists of lowercase English letters.
+
+Solution:-
+class Solution(object):
+    def uniqueMorseRepresentations(self, words):
+        # Morse code mapping for each letter a-z
+        morse_code = [
+            ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", 
+            ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", 
+            "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."
+        ]
+        
+        # Create a set to hold unique Morse code representations
+        unique_transformations = set()
+        
+        # Process each word in the input list
+        for word in words:
+            # Convert the word to its Morse code representation
+            morse_transformation = ""
+            for char in word:
+                # Find the Morse code for the letter and add it to the transformation
+                index = ord(char) - ord('a')  # Calculate the index for the letter
+                morse_transformation += morse_code[index]
+            
+            # Add the Morse transformation to the set
+            unique_transformations.add(morse_transformation)
+        
+        # Return the number of unique Morse code transformations
+        return len(unique_transformations)
+
+# Example usage
+solution = Solution()
+words1 = ["gin", "zen", "gig", "msg"]
+print(solution.uniqueMorseRepresentations(words1))  # Output: 2
+
+words2 = ["a"]
+print(solution.uniqueMorseRepresentations(words2))  # Output: 1

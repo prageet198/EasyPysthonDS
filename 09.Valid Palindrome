@@ -1,0 +1,42 @@
+TITLE:-Valid Palindrome
+URL:-https://leetcode.com/problems/valid-palindrome-ii/description/
+
+Question:-
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+Example 1:
+
+Input: s = "aba"
+Output: true
+Example 2:
+
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+Example 3:
+
+Input: s = "abc"
+Output: false
+ 
+
+Solution:-
+class Solution(object):
+    def validPalindrome(self, s):
+        left = 0
+        right = len(s) - 1
+
+        while left < right:
+            if s[left] != s[right]:
+                # Check by removing one character
+                skip_left = s[left + 1:right + 1]  # Remove the left character
+                skip_right = s[left:right]          # Remove the right character
+                return skip_left == skip_left[::-1] or skip_right == skip_right[::-1]
+            left += 1
+            right -= 1
+
+        return True  # The string is already a palindrome
+
+# Example usage
+solution = Solution()
+print(solution.validPalindrome("aba"))   # Output: True
+print(solution.validPalindrome("abca"))  # Output: True
+print(solution.validPalindrome("abc"))   # Output: False

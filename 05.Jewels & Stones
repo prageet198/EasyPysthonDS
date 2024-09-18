@@ -1,0 +1,34 @@
+TITLE:-Jewels & Stones
+URL:-https://leetcode.com/problems/jewels-and-stones/description/
+
+Question:-
+You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have.
+Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
+
+Letters are case sensitive, so "a" is considered a different type of stone from "A".
+Example 1:
+
+Input: jewels = "aA", stones = "aAAbbbb"
+Output: 3
+Example 2:
+
+Input: jewels = "z", stones = "ZZ"
+Output: 0
+
+Solution:-
+class Solution(object):
+    def numJewelsInStones(self, jewels, stones):
+        count = 0  # Start a counter for jewels
+
+        # Check each stone in the stones string
+        for stone in stones:
+            # If the stone is in the jewels string, it's a jewel
+            if stone in jewels:
+                count += 1  # Increase the count by 1
+
+        return count  # Return the total count of jewels
+
+# Example usage:
+solution = Solution()
+print(solution.numJewelsInStones("aA", "aAAbbbb"))  # Output: 3
+print(solution.numJewelsInStones("z", "ZZ"))        # Output: 0

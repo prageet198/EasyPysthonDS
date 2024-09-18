@@ -1,0 +1,58 @@
+TITLE:-Most Common Word
+URL:-https://leetcode.com/problems/most-common-word/description/
+
+Question:-
+Given a string paragraph and a string array of the banned words banned, return the most frequent word that is not banned. 
+It is guaranteed there is at least one word that is not banned, and that the answer is unique.
+The words in paragraph are case-insensitive and the answer should be returned in lowercase.
+
+Solution:-
+import re
+from collections import Counter
+
+class Solution(object):
+    def mostCommonWord(self, paragraph, banned):
+        # Convert the paragraph to lowercase and find all words
+        words = re.findall(r'\w+', paragraph.lower())
+        
+        # Create a set of banned words for quick lookup
+        banned_set = set(banned)
+        
+        # Count occurrences of non-banned words
+        word_count = Counter()
+        
+        for word in words:
+            if word not in banned_set:
+                word_count[word] += 1  # Increment the count for this word
+        
+        # Find the word with the highest count
+        most_common_word = word_count.most_common(1)[0][0]
+        
+        return most_common_word
+
+# Example usage
+solution = Solution()
+paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+banned = ["hit"]
+print(solution.mostCommonWord(paragraph, banned))  # Output: "ball"
+
+# word_count: This is a Counter object that holds the counts of each word. It’s like a dictionary where the keys are words and the values are their counts.
+
+# most_common(1): This method of the Counter class returns a list of the n most common elements and their counts. 
+# When we call most_common(1), we are asking for the single most common word. The result will be a list containing one tuple.
+For example, if word_count contained:
+{'ball': 3, 'far': 1}
+
+Then word_count.most_common(1) would return:
+[('ball', 3)]
+
+[0]: This accesses the first (and only) element of the list returned by most_common(1). Since it returns a list of tuples, 
+this element is a tuple itself, in our case ('ball', 3).
+
+[0] (again): This accesses the first element of the tuple, which is the word itself. So in the example, it would give you 'ball'.
+
+    most_common(1) gives you a list with the most common word and its count.
+    The first [0] gets that tuple from the list.
+    The second [0] retrieves the word from the tuple.
+
+Thus, most_common_word = word_count.most_common(1)[0][0] results in most_common_word holding the string of the most frequent word.

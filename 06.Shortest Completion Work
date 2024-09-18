@@ -1,0 +1,83 @@
+TITLE:-Shortest Completion Work
+URL:-https://leetcode.com/problems/shortest-completing-word/description/
+
+Question:-
+Given a string licensePlate and an array of strings words, find the shortest completing word in words.
+
+A completing word is a word that contains all the letters in licensePlate. Ignore numbers and spaces in licensePlate, and treat letters as case insensitive. 
+If a letter appears more than once in licensePlate, then it must appear in the word the same number of times or more.
+
+For example, if licensePlate = "aBc 12c", then it contains letters 'a', 'b' (ignoring case), and 'c' twice. Possible completing words are "abccdef", "caaacab", 
+and "cbca".
+
+Return the shortest completing word in words. It is guaranteed an answer exists. If there are multiple shortest completing words, return the first 
+one that occurs in words.
+
+ 
+
+Example 1:
+
+Input: licensePlate = "1s3 PSt", words = ["step","steps","stripe","stepple"]
+Output: "steps"
+Explanation: licensePlate contains letters 's', 'p', 's' (ignoring case), and 't'.
+"step" contains 't' and 'p', but only contains 1 's'.
+"steps" contains 't', 'p', and both 's' characters.
+"stripe" is missing an 's'.
+"stepple" is missing an 's'.
+Since "steps" is the only word containing all the letters, that is the answer.
+Example 2:
+
+Input: licensePlate = "1s3 456", words = ["looks","pest","stew","show"]
+Output: "pest"
+Explanation: licensePlate only contains the letter 's'. All the words contain 's', but among these "pest", "stew", and "show" are shortest. 
+The answer is "pest" because it is the word that appears earliest of the 3.
+
+Solution:-
+from collections import Counter
+
+class Solution(object):
+    def shortestCompletingWord(self, licensePlate, words):
+        # Step 1: Create a dictionary to count the letters in the licensePlate
+        letter_count = {}
+        
+        for char in licensePlate:
+            # Check if the character is a letter
+            if char.isalpha():
+                # Convert to lowercase
+                char = char.lower()
+                # Count the letters
+                if char in letter_count:
+                    letter_count[char] += 1
+                else:
+                    letter_count[char] = 1
+
+        # Step 2: Function to check if a word is a completing word
+        def is_completing_word(word):
+            word_count = Counter(word)  # Count letters in the word
+            
+            # Check if the word has all required letters
+            for char, count in letter_count.items():
+                if word_count[char] < count:
+                    return False  # Not enough of this letter
+            return True  # Word is completing
+
+        # Step 3: Find the shortest completing word
+        shortest_word = None
+        
+        for word in words:
+            if is_completing_word(word):  # Check if this word is a completing word
+                # If it's the first completing word or shorter than the current shortest
+                if shortest_word is None or len(word) < len(shortest_word):
+                    shortest_word = word
+
+        return shortest_word  # Return the shortest completing word
+
+# Example usage:
+solution = Solution()
+licensePlate1 = "1s3 PSt"
+words1 = ["step", "steps", "stripe", "stepple"]
+print(solution.shortestCompletingWord(licensePlate1, words1))  # Output: "steps"
+
+licensePlate2 = "1s3 456"
+words2 = ["looks", "pest", "stew", "show"]
+print(solution.shortestCompletingWord(licensePlate2, words2))  # Output: "pest"

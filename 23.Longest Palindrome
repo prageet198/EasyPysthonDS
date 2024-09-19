@@ -1,0 +1,53 @@
+TITLE:-Longest Palindrome
+URL:-https://leetcode.com/problems/longest-palindrome/description/
+
+Question:-
+Given a string s which consists of lowercase or uppercase letters, return the length of the longest 
+palindrome
+ that can be built with those letters.
+
+Letters are case sensitive, for example, "Aa" is not considered a palindrome.
+
+ 
+
+Example 1:
+
+Input: s = "abccccdd"
+Output: 7
+Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.
+Example 2:
+
+Input: s = "a"
+Output: 1
+Explanation: The longest palindrome that can be built is "a", whose length is 1.
+
+Solution:-
+class Solution(object):
+    def longestPalindrome(self, s):
+        char_count = {}
+        
+        # Count occurrences of each character
+        for char in s:
+            char_count[char] = char_count.get(char, 0) + 1
+        
+        length = 0
+        odd_found = False
+        
+        # Calculate the length of the longest palindrome
+        for count in char_count.values():
+            if count % 2 == 0:
+                length += count  # Add even counts
+            else:
+                length += count - 1  # Add the largest even number
+                odd_found = True  # Mark that we found an odd count
+        
+        # If we found any odd counts, we can add one more character in the middle
+        if odd_found:
+            length += 1
+        
+        return length
+
+# Example usage
+solution = Solution()
+print(solution.longestPalindrome("abccccdd"))  # Output: 7
+print(solution.longestPalindrome("a"))          # Output: 1

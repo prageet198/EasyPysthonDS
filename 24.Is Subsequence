@@ -1,0 +1,39 @@
+TITLE:-Is Subsequence
+URL:-https://leetcode.com/problems/is-subsequence/
+
+Question:-
+Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing 
+the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+ 
+
+Example 1:
+
+Input: s = "abc", t = "ahbgdc"
+Output: true
+Example 2:
+
+Input: s = "axc", t = "ahbgdc"
+Output: false
+
+Solution:-
+class Solution(object):
+    def isSubsequence(self, s, t):
+        # Pointer for s
+        s_index = 0
+
+        # Loop through each character in t
+        for char in t:
+            # If the current character matches the current character in s
+            if s_index < len(s) and char == s[s_index]:
+                s_index += 1
+
+        # If we've matched all characters in s, return True
+        return s_index == len(s)
+
+# Example usage
+solution = Solution()
+print(solution.isSubsequence("abc", "ahbgdc"))  # Output: True
+print(solution.isSubsequence("axc", "ahbgdc"))  # Output: False

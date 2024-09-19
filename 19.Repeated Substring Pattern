@@ -1,0 +1,38 @@
+TITLE:-Repeated Substring Pattern
+URL:-https://leetcode.com/problems/repeated-substring-pattern/description/
+
+Question:-
+Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.
+Example 1:
+
+Input: s = "abab"
+Output: true
+Explanation: It is the substring "ab" twice.
+Example 2:
+
+Input: s = "aba"
+Output: false
+Example 3:
+
+Input: s = "abcabcabcabc"
+Output: true
+Explanation: It is the substring "abc" four times or the substring "abcabc" twice.
+
+Solution:-
+class Solution(object):
+    def repeatedSubstringPattern(self, s):
+        # Check for empty string
+        if not s:
+            return False
+        
+        # Create a new string by concatenating s with itself
+        doubled_s = s + s
+        
+        # Check if the original string is in the sliced doubled string
+        return s in doubled_s[1:-1]
+
+# Example usage:
+solution = Solution()
+print(solution.repeatedSubstringPattern("abab"))        # Output: True
+print(solution.repeatedSubstringPattern("aba"))         # Output: False
+print(solution.repeatedSubstringPattern("abcabcabcabc")) # Output: True

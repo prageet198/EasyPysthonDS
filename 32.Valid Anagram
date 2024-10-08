@@ -1,0 +1,41 @@
+TITLE:-Valid Anagram
+URL:-https://leetcode.com/problems/valid-anagram/description/
+
+Question:-
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+
+Output: true
+
+Example 2:
+
+Input: s = "rat", t = "car"
+
+Output: false
+
+Solution:-
+class Solution(object):
+    def isAnagram(self, s, t):
+        # Anagrams must be of the same length
+        if len(s) != len(t):
+            return False
+        
+        # Count the characters in both strings
+        count_s = {}
+        count_t = {}
+
+        for char in s:
+            count_s[char] = count_s.get(char, 0) + 1
+
+        for char in t:
+            count_t[char] = count_t.get(char, 0) + 1
+
+        # Compare the character counts
+        return count_s == count_t
+
+# Example usage
+solution = Solution()
+print(solution.isAnagram("anagram", "nagaram"))  # Output: True
+print(solution.isAnagram("rat", "car"))          # Output: False

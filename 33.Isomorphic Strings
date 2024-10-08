@@ -1,0 +1,68 @@
+TITLE:-Isomorphic Strings
+URL:-https://leetcode.com/problems/isomorphic-strings/description/
+
+Question:-
+Given two strings s and t, determine if they are isomorphic.
+
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, 
+but a character may map to itself.
+
+ 
+Example 1:
+
+Input: s = "egg", t = "add"
+
+Output: true
+
+Explanation:
+
+The strings s and t can be made identical by:
+
+Mapping 'e' to 'a'.
+Mapping 'g' to 'd'.
+Example 2:
+
+Input: s = "foo", t = "bar"
+
+Output: false
+
+Explanation:
+
+The strings s and t can not be made identical as 'o' needs to be mapped to both 'a' and 'r'.
+
+Example 3:
+
+Input: s = "paper", t = "title"
+
+Output: true
+
+Solution:-
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        # Step 1: Check if the lengths are the same
+        if len(s) != len(t):
+            return False
+
+        # Step 2: Create a mapping dictionary
+        mapping = {}
+
+        # Step 3: Loop through each character in both strings
+        for char_s, char_t in zip(s, t):
+            # Step 4: If char_s is already mapped
+            if char_s in mapping:
+                # Check if it maps to the correct character in t
+                if mapping[char_s] != char_t:
+                    return False  # Mismatch found
+            else:
+                # Step 5: Create a new mapping
+                mapping[char_s] = char_t
+
+        return True  # If we finish the loop without issues, return True
+
+# Example usage:
+solution = Solution()
+print(solution.isIsomorphic("egg", "add"))   # Output: True
+print(solution.isIsomorphic("foo", "bar"))   # Output: False
+print(solution.isIsomorphic("paper", "title"))  # Output: True

@@ -1,0 +1,41 @@
+TITLE:-Reverse String
+URL:-https://leetcode.com/problems/reverse-string/description/
+
+Question:-
+Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.
+
+Example 1:
+
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+Example 2:
+
+Input: s = ["H","a","n","n","a","h"]
+Output: ["h","a","n","n","a","H"]
+
+Solution:-
+class Solution(object):
+    def reverseString(self, s):
+        left = 0
+        right = len(s) - 1
+        
+        while left < right:
+            # Swap characters
+            temp = s[left]
+            s[left] = s[right]
+            s[right] = temp
+            
+            left += 1
+            right -= 1
+
+# Example usage:
+solution = Solution()
+s1 = ["h", "e", "l", "l", "o"]
+solution.reverseString(s1)
+print(s1)  # Output: ["o", "l", "l", "e", "h"]
+
+s2 = ["H", "a", "n", "n", "a", "h"]
+solution.reverseString(s2)
+print(s2)  # Output: ["h", "a", "n", "n", "a", "H"]

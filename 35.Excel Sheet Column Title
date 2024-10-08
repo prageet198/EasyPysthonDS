@@ -1,0 +1,49 @@
+TITLE:-Excel Sheet Column Title
+URL:-https://leetcode.com/problems/excel-sheet-column-title/description/
+
+Question:-
+Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
+
+For example:
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+ 
+
+Example 1:
+
+Input: columnNumber = 1
+Output: "A"
+Example 2:
+
+Input: columnNumber = 28
+Output: "AB"
+Example 3:
+
+Input: columnNumber = 701
+Output: "ZY"
+
+Solution:-
+class Solution(object):
+    def convertToTitle(self, columnNumber):
+        title = ""  # Initialize an empty string for the column title
+        
+        while columnNumber > 0:
+            columnNumber -= 1  # Adjust for 0-based indexing
+            remainder = columnNumber % 26  # Find the letter index
+            title = chr(remainder + ord('A')) + title  # Get the letter and prepend it
+            columnNumber //= 26  # Move to the next "digit"
+        
+        return title  # Return the final title
+
+# Example usage:
+solution = Solution()
+print(solution.convertToTitle(1))    # Output: "A"
+print(solution.convertToTitle(28))   # Output: "AB"
+print(solution.convertToTitle(701))  # Output: "ZY"

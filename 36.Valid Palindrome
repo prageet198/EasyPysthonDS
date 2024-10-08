@@ -1,0 +1,48 @@
+TITLE:-Valid Palindrome
+URL:-https://leetcode.com/problems/valid-palindrome/description/
+
+Question:-
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, 
+it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+Example 2:
+
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+Example 3:
+
+Input: s = " "
+Output: true
+Explanation: s is an empty string "" after removing non-alphanumeric characters.
+Since an empty string reads the same forward and backward, it is a palindrome.
+
+Solution:-
+class Solution(object):
+    def isPalindrome(self, s):
+        # Step 1: Convert the string to lowercase
+        s = s.lower()
+        
+        # Step 2: Remove non-alphanumeric characters
+        cleaned = ""
+        for char in s:
+            if char.isalnum():  # Check if the character is alphanumeric
+                cleaned += char  # Add it to the cleaned string
+        
+        # Step 3: Check if the cleaned string is the same forwards and backwards
+        return cleaned == cleaned[::-1]  # Compare cleaned string to its reverse
+
+# Example usage
+solution = Solution()
+print(solution.isPalindrome("A man, a plan, a canal: Panama"))  # Output: True
+print(solution.isPalindrome("race a car"))                        # Output: False
+print(solution.isPalindrome(" "))                                  # Output: True

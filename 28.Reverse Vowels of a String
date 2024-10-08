@@ -1,0 +1,60 @@
+TITLE:-Reverse Vowels of a String
+URL:-https://leetcode.com/problems/reverse-vowels-of-a-string/description/
+
+Question:-
+Given a string s, reverse only all the vowels in the string and return it.
+
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+
+Example 1:
+
+Input: s = "IceCreAm"
+
+Output: "AceCreIm"
+
+Explanation:
+
+The vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes "AceCreIm".
+
+Example 2:
+
+Input: s = "leetcode"
+
+Output: "leotcede"
+
+Solution:-
+class Solution(object):
+    def reverseVowels(self, s):
+        # Step 1: Define vowels
+        vowels = 'aeiouAEIOU'  # All vowels in both cases
+        
+        # Step 2: Create a list to hold the vowels found in the string
+        found_vowels = []
+        
+        # Step 3: Collect all vowels from the string
+        for char in s:
+            if char in vowels:
+                found_vowels.append(char)  # Add the vowel to the list
+        
+        # Step 4: Reverse the list of found vowels
+        found_vowels.reverse()
+        
+        # Step 5: Create a list to build the result string
+        result = []
+        vowel_index = 0  # To track the position of vowels in the reversed list
+        
+        # Step 6: Rebuild the string with reversed vowels
+        for char in s:
+            if char in vowels:
+                result.append(found_vowels[vowel_index])  # Add the next reversed vowel
+                vowel_index += 1  # Move to the next vowel in the reversed list
+            else:
+                result.append(char)  # Add the consonant as is
+        
+        # Step 7: Join the result list into a string and return it
+        return ''.join(result)
+
+# Example usage:
+solution = Solution()
+print(solution.reverseVowels("IceCreAm"))  # Output: "AceCreIm"
+print(solution.reverseVowels("leetcode"))   # Output: "leotcede"

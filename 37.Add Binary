@@ -1,0 +1,46 @@
+TITLE:-Add Binary
+URL:-https://leetcode.com/problems/add-binary/description/
+
+Question:-
+Given two binary strings a and b, return their sum as a binary string.
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+
+Solution:-
+
+class Solution(object):
+    def addBinary(self, a, b):
+        # Initialize the result and carry
+        result = []
+        carry = 0
+
+        # Loop through both strings from right to left
+        for i in range(max(len(a), len(b))):
+            # Get the current bits or 0 if out of bounds
+            bit_a = int(a[-1 - i]) if i < len(a) else 0
+            bit_b = int(b[-1 - i]) if i < len(b) else 0
+            
+            # Calculate total
+            total = bit_a + bit_b + carry
+            result.append(str(total % 2))  # Result bit
+            carry = total // 2  # Update carry
+
+        # If there's a carry left, add it
+        if carry:
+            result.append('1')
+
+        # Reverse the result to get the correct order and join it
+        return ''.join(result[::-1])
+
+# Example usage:
+sol = Solution()
+print(sol.addBinary("11", "1"))     # Output: "100"
+print(sol.addBinary("1010", "1011")) # Output: "10101"
